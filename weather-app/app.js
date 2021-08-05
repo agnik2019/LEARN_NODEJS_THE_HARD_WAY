@@ -1,4 +1,6 @@
-const geocode = require('./utils/geocode')
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
+
 
 // const url ="http://api.weatherstack.com/current?access_key=3a97ca219bae8fcff391e93a56ed6ecb&query=37.8267,-122.4233"
 
@@ -29,8 +31,34 @@ const geocode = require('./utils/geocode')
 //     }
 // })
 
-geocode('Dhaka', (error,data)=> {
+// geocode('Dhaka', (error,data)=> {
+//     console.log('Error', error);
+//     console.log('Data',data);
+// });
+
+// forecast(23.784506,90.403409, (error,data) => {
+//     console.log('Error',error);
+//     console.log('Data', data);
+// })
+const address = process.argv[2];
+
+if(!address){
+    console.log('Please provide an address');
+} else {
+geocode(address, (error,data)=> {
+    if(error){
+        return console.log(error);
+    } 
     console.log('Error', error);
     console.log('Data',data);
-})
+    forecast(data.latitude,data.longitude, (error,forecastdata) => {
+        if(error){
+            return console.log(error);
+        } 
+        console.log(data.location);
+        console.log(forecastdata);
+    })
+});
+}
+
 
