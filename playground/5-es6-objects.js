@@ -1,3 +1,4 @@
+/*
 // Object property Shorthand
 
 const name = 'Agnik'
@@ -27,7 +28,11 @@ const product = {
 // console.log(productlabel);
 // console.log(stock)
 // console.log(rating)
-const transaction = (type, {label, price}) => {
+
+*/
+
+const transaction = (type, {label, price=0} = {}) => {
     console.log(type, label, price)
 }
-transaction('order', product)
+//transaction('order', product)
+transaction('order');
